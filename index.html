@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hilya Abdirahman | Developer Portfolio</title>
+<meta name="description" content="Portfolio of Hilya Abdirahman, an aspiring web developer in Nairobi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #3d4a6b;
+    --line: #c5cbdb;
+    --grey: #14213d;
+    --bar: #cdcdcd;
+    --white: #fff;
+    --accent: #ff5a1f;
+    --accent-dark: #d94512;
+    --font: "Patrick Hand", "Comic Sans MS", "Segoe Print", cursive, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body {
+    font-family: var(--font);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--white);
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { width: min(1000px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* Navigation */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--white);
+    border-bottom: 2px solid var(--ink);
+  }
+  nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem 0; flex-wrap: wrap; }
+  .logo { font-size: 1.3rem; }
+  nav ul { list-style: none; display: flex; gap: 1.6rem; }
+  nav a { padding-bottom: 2px; border-bottom: 2px solid transparent; }
+  nav a:hover, nav a.active { border-bottom-color: var(--accent); }
+
+  .menu-btn {
+    display: none; font: inherit; cursor: pointer;
+    background: transparent; border: 2px solid var(--ink); border-radius: 6px;
+    padding: .25rem .8rem;
+  }
+  header.scrolled { box-shadow: 0 3px 0 var(--line); }
+
+  /* Hero */
+  .hero { background: var(--grey); color: #fff; border-bottom: 1px solid var(--line); }
+  .hero .wrap { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-top: 3rem; }
+  .hero-text { padding-bottom: 3rem; }
+  .hero-text .hi { font-size: 1.8rem; margin: 0; max-width: none; color: #fff; }
+  .hero-text h1 { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 400; line-height: 1.1; display: inline-block; }
+  .underline { display: block; height: 4px; width: 100%; background: var(--accent); border-radius: 4px; margin-top: 2px; }
+  .hero-text p { margin-top: 1rem; font-size: 1.3rem; color: #d6dcf0; max-width: 22ch; }
+  .hero .btn.ghost { color: #fff; border-color: #fff; }
+  .hero .btn.ghost:hover { background: #fff; color: var(--grey); }
+  .hero-actions { display: flex; gap: .8rem; margin-top: 1.4rem; flex-wrap: wrap; }
+  .avatar { width: min(280px, 38vw); flex-shrink: 0; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; font: inherit; cursor: pointer;
+    padding: .55rem 1.6rem; border-radius: 6px;
+    border: 2px solid var(--accent); background: var(--accent); color: #fff;
+    transition: background .15s;
+  }
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: #fff; }
+
+  /* Sections */
+  section.block { padding: 2rem 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 1.7rem; font-weight: 400; margin-bottom: .8rem; }
+  .about p { max-width: 62ch; color: var(--muted); }
+  .about p + p { margin-top: .7rem; }
+
+  /* Skills */
+  .skills ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+  .skills li {
+    text-align: center; padding: .55rem; background: #fafafa;
+    border: 1.5px solid var(--line); border-radius: 8px;
+    box-shadow: 0 2px 0 var(--line);
+  }
+
+  /* Projects */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; }
+  .card {
+    display: flex; flex-direction: column; gap: .5rem;
+    padding: 1rem 1.1rem; border: 2px solid #14213d; border-radius: 8px; background: var(--white);
+  }
+  .card h3 { font-size: 1.35rem; font-weight: 400; }
+  .card p { color: var(--muted); font-size: 1.05rem; flex-grow: 1; }
+  .tags { font-size: .95rem; color: var(--muted); }
+  .card a.view { margin-top: .4rem; width: fit-content; border-bottom: 2px solid transparent; }
+  .card a.view:hover { border-bottom-color: var(--accent); }
+  .card:hover { border-color: var(--accent); }
+
+  /* Contact */
+  .intro { color: var(--muted); margin-bottom: 1rem; }
+  .contact-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; align-items: start; }
+  .details { display: flex; flex-direction: column; gap: .15rem; padding: 1rem 1.1rem; border: 2px solid var(--grey); border-radius: 8px; }
+  .details p { color: var(--muted); font-size: 1rem; margin-top: .6rem; }
+  .details p:first-child { margin-top: 0; }
+  .details a { width: fit-content; border-bottom: 2px solid transparent; word-break: break-all; }
+  .details a:hover { border-bottom-color: var(--accent); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+  form .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 1rem; color: var(--muted); margin-bottom: 2px; }
+  input, textarea {
+    width: 100%; font: inherit; padding: .55rem .7rem;
+    border: 1.5px solid #14213d; border-radius: 6px; background: var(--white);
+  }
+  input:focus, textarea:focus { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
+  textarea { min-height: 120px; resize: vertical; }
+  #status { grid-column: 1 / -1; min-height: 1.5em; color: var(--accent-dark); }
+
+  /* Footer */
+  footer { padding: 1.1rem 0; font-size: 1rem; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .social { display: flex; gap: 1rem; list-style: none; }
+  .social a { display: block; padding: 4px; border-radius: 6px; }
+  .social a:hover { color: var(--accent); }
+  .social svg { width: 24px; height: 24px; fill: currentColor; display: block; }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    nav { justify-content: space-between; }
+    nav ul { gap: 1.1rem; }
+    .js .menu-btn { display: block; }
+    .js nav ul { display: none; flex-direction: column; width: 100%; gap: 0; padding-bottom: .5rem; }
+    .js nav ul.open { display: flex; }
+    .js nav ul a { display: block; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+    .hero .wrap { flex-direction: column-reverse; align-items: center; text-align: center; padding-top: 1.5rem; }
+    .hero-text { padding-bottom: 2rem; }
+    .hero-text p { margin-inline: auto; max-width: 30ch; }
+    .hero-actions { justify-content: center; }
+    .avatar { width: 200px; margin-bottom: -1px; }
+    form { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+    footer .wrap { justify-content: center; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap" aria-label="Main">
+    <a href="#home" class="logo">Hilya Abdirahman</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="hi">Hi, I'm</p>
+        <h1>Hilya Abdirahman<span class="underline"></span></h1>
+        <p>An aspiring web developer who loves building for the web.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#projects">See my work</a>
+          <a class="btn ghost" href="#contact">Say hello</a>
+        </div>
+      </div>
+      <!-- Sketch-style avatar (replace with your own photo or illustration) -->
+      <svg class="avatar" viewBox="0 0 280 300" role="img" aria-label="Sketch of a smiling developer in a hoodie">
+        <circle cx="140" cy="170" r="125" fill="#2b3f72"/>
+        <path d="M30 300 C35 235 80 215 140 215 C200 215 245 235 250 300 Z" fill="#fff" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M95 222 C100 250 180 250 185 222" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+        <path d="M140 250 V300" stroke="#1a1a1a" stroke-width="3"/>
+        <ellipse cx="140" cy="130" rx="55" ry="64" fill="#fff" stroke="#1a1a1a" stroke-width="3"/>
+        <path d="M82 120 C80 60 200 55 198 120 C180 90 110 90 82 120 Z" fill="#1a1a1a"/>
+        <circle cx="118" cy="135" r="5" fill="#1a1a1a"/>
+        <circle cx="162" cy="135" r="5" fill="#1a1a1a"/>
+        <path d="M120 160 C132 175 148 175 160 160" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M232 60 l18 -12 M236 80 l22 -4 M222 42 l8 -18" stroke="#ff5a1f" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="block about" id="about">
+    <div class="wrap">
+      <h2>About Me</h2>
+      <p>I'm a Computer Science and IT student at Umma University in Nairobi, Kenya. I enjoy turning ideas into working apps and clean, simple designs.</p>
+      <p>I like projects with a real purpose: tools for students, communities and charities. I'm always learning and building.</p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="block skills" id="skills">
+    <div class="wrap">
+      <h2>My Skills</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Git</li>
+        <li>UI Design</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="block" id="projects">
+    <div class="wrap">
+      <h2>My Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>EduTrack</h3>
+          <p>A student management system for tracking students and records in one place.</p>
+          <span class="tags">React · Vercel</span>
+          <a class="view" href="https://github.com/hilyaabdirahman23-oss" target="_blank" rel="noopener">View Project →</a>
+        </article>
+        <article class="card">
+          <h3>Masjid Al-Noor Sadaqa</h3>
+          <p>A charity donation dashboard with Islamic geometric design touches.</p>
+          <span class="tags">React · Next.js</span>
+          <a class="view" href="https://github.com/hilyaabdirahman23-oss" target="_blank" rel="noopener">View Project →</a>
+        </article>
+        <article class="card">
+          <h3>Scholar App</h3>
+          <p>An interactive prototype that helps students find scholarships that fit them.</p>
+          <span class="tags">HTML · CSS · JavaScript</span>
+          <a class="view" href="https://github.com/hilyaabdirahman23-oss" target="_blank" rel="noopener">View Project →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="block" id="contact" style="border-bottom:0">
+    <div class="wrap">
+      <h2>Contact Me</h2>
+      <p class="intro">Have a project or an idea? Send me a message.</p>
+      <div class="contact-grid">
+        <form id="contact-form" novalidate>
+          <div>
+            <label class="sr" for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Name" autocomplete="name" required>
+          </div>
+          <div>
+            <label class="sr" for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+          </div>
+          <div class="full">
+            <label class="sr" for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Message" required></textarea>
+          </div>
+          <div class="full"><button class="btn" type="submit">Send</button></div>
+          <p id="status" role="status" aria-live="polite"></p>
+        </form>
+        <aside class="details" aria-label="Contact details">
+          <p>Email me</p>
+          <a href="mailto:your.email@example.com">your.email@example.com</a>
+          <p>Based in</p>
+          <span>Nairobi, Kenya</span>
+          <p>Find me on</p>
+          <a href="https://github.com/hilyaabdirahman23-oss" target="_blank" rel="noopener">GitHub</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p>© 2026 Hilya Abdirahman. All rights reserved.</p>
+    <ul class="social" aria-label="Social links">
+      <li><a href="https://github.com/hilyaabdirahman23-oss" aria-label="GitHub" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a></li>
+      <li><a href="#" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+      <li><a href="#" aria-label="Twitter / X">
+        <svg viewBox="0 0 24 24"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"/></svg></a></li>
+      <li><a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Contact form: basic validation and confirmation (no server connected yet)
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('status');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    if (!name || !message || !/^\S+@\S+\.\S+$/.test(email)) {
+      status.textContent = 'Please enter your name, a valid email and a message.';
+      return;
+    }
+    status.textContent = 'Thanks, ' + name + '! Your message is ready to send.';
+    form.reset();
+  });
+
+  // Highlight the current section in the nav
+  const links = document.querySelectorAll('nav a[href^="#"]');
+  const map = {};
+  links.forEach(l => map[l.getAttribute('href').slice(1)] = l);
+  const targets = ['home', 'about', 'projects', 'contact'].map(id => document.getElementById(id));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        map[en.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  targets.forEach(t => t && io.observe(t));
+
+  // Responsive menu: toggle on small screens
+  document.documentElement.classList.add('js');
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+  const header = document.querySelector('header');
+
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Close' : 'Menu';
+  }
+  btn.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  document.addEventListener('click', e => { if (!header.contains(e.target)) setMenu(false); });
+  window.matchMedia('(min-width: 721px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  // Header shadow once the page is scrolled
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 10);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>
